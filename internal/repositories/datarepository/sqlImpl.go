@@ -4,11 +4,12 @@ import (
 	"context"
 	"database/sql"
 
+	"protected-storage-server/internal/entity/myerrors"
+
 	"github.com/omeid/pgerror"
 	"github.com/rs/zerolog/log"
 
 	"protected-storage-server/internal/entity"
-	"protected-storage-server/internal/entity/myerrors"
 )
 
 const (

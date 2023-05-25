@@ -4,12 +4,13 @@ import (
 	"context"
 	"errors"
 
+	"protected-storage-server/internal/entity/myerrors"
+
 	"github.com/google/uuid"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
 	"protected-storage-server/internal/entity"
-	"protected-storage-server/internal/entity/myerrors"
 	"protected-storage-server/internal/security"
 	"protected-storage-server/internal/service/dataservice"
 	"protected-storage-server/internal/service/userservice"

@@ -4,9 +4,10 @@ import (
 	"context"
 	"encoding/base64"
 
+	"protected-storage-server/internal/entity/myerrors"
+
 	"github.com/rs/zerolog/log"
 
-	"protected-storage-server/internal/entity/myerrors"
 	"protected-storage-server/internal/repositories/userrepository"
 )
 

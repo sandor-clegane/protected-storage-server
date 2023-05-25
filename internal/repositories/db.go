@@ -2,6 +2,7 @@ package repositories
 
 import (
 	"database/sql"
+	"fmt"
 	"log"
 )
 
@@ -28,6 +29,7 @@ func InitDB(dbAddress string) (*sql.DB, error) {
 		return db, nil
 	}
 
+	fmt.Println(dbAddress)
 	newConn, connectionErr := sql.Open("postgres", dbAddress)
 	if connectionErr != nil {
 		log.Println(connectionErr)
@@ -40,7 +42,7 @@ func InitDB(dbAddress string) (*sql.DB, error) {
 		log.Println(createTableErr)
 		return nil, createTableErr
 	}
-	
+
 	return db, nil
 }
 
