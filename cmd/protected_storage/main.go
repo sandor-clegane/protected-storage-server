@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 
 	"protected-storage-server/internal/app"
@@ -10,8 +9,10 @@ import (
 
 func main() {
 	var cfg config.Config
-	cfg.Init()
-	fmt.Println(cfg)
+	err := cfg.Init()
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	grpcApp, err := app.NewGRPC(cfg)
 	if err != nil {

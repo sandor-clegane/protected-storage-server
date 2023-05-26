@@ -14,8 +14,8 @@ type JWTManager struct {
 	tokenDuration time.Duration
 }
 
-func NewJWTManager(secretKey string, tokenDuration time.Duration) (*JWTManager, error) {
-	return &JWTManager{secretKey, tokenDuration}, nil
+func NewJWTManager(secretKey string, tokenDuration time.Duration) *JWTManager {
+	return &JWTManager{secretKey, tokenDuration}
 }
 
 type UserClaims struct {

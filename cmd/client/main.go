@@ -26,4 +26,7 @@ func main() {
 		Login:    "test",
 		Password: "test",
 	})
+	if err != nil {
+		log.Println(err)
+	}
 }

@@ -5,21 +5,21 @@ import (
 )
 
 type UserViolationError struct {
-	Err   error
-	Login string
+	err   error
+	login string
 }
 
 func (ve *UserViolationError) Error() string {
-	return fmt.Sprintf("user with login %s already exists", ve.Login)
+	return fmt.Sprintf("user with login %s already exists", ve.login)
 }
 
 func (ve *UserViolationError) Unwrap() error {
-	return ve.Err
+	return ve.err
 }
 
 func NewUserViolationError(login string, err error) error {
 	return &UserViolationError{
-		Login: login,
-		Err:   err,
+		login: login,
+		err:   err,
 	}
 }

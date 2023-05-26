@@ -5,21 +5,21 @@ import (
 )
 
 type DataViolationError struct {
-	Err  error
-	Name string
+	err  error
+	name string
 }
 
 func (dv *DataViolationError) Error() string {
-	return fmt.Sprintf("data with name %s already exists", dv.Name)
+	return fmt.Sprintf("data with name %s already exists", dv.name)
 }
 
 func (dv *DataViolationError) Unwrap() error {
-	return dv.Err
+	return dv.err
 }
 
 func NewDataViolationError(name string, err error) error {
 	return &DataViolationError{
-		Name: name,
-		Err:  err,
+		name: name,
+		err:  err,
 	}
 }

@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/base64"
 
-	"protected-storage-server/internal/entity/myerrors"
+	"protected-storage-server/internal/myerrors"
 
 	"github.com/rs/zerolog/log"
 
@@ -39,7 +39,7 @@ func (u userServiceImpl) Login(ctx context.Context, login, password string) (str
 
 	if password != string(decodedPassword) {
 		log.Error().Msgf("userservice: password %s is invalid", password)
-		return "", &myerrors.InvalidPasswordError{Password: password}
+		return "", myerrors.NewInvalidPasswordError(password)
 	}
 
 	return foundUser.ID, nil

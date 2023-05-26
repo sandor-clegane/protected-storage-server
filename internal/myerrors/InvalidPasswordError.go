@@ -5,15 +5,15 @@ import (
 )
 
 type InvalidPasswordError struct {
-	Password string
+	password string
 }
 
 func (ip *InvalidPasswordError) Error() string {
-	return fmt.Sprintf("password %s invalid", ip.Password)
+	return fmt.Sprintf("password %s invalid", ip.password)
 }
 
 func NewInvalidPasswordError(password string) error {
 	return &InvalidPasswordError{
-		Password: password,
+		password: password,
 	}
 }

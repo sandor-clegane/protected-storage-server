@@ -5,7 +5,7 @@ import (
 )
 
 type NotFoundError struct {
-	Err  error
+	err  error
 	Name string
 }
 
@@ -14,12 +14,12 @@ func (nf *NotFoundError) Error() string {
 }
 
 func (nf *NotFoundError) Unwrap() error {
-	return nf.Err
+	return nf.err
 }
 
 func NewNotFoundError(name string, err error) error {
 	return &NotFoundError{
 		Name: name,
-		Err:  err,
+		err:  err,
 	}
 }

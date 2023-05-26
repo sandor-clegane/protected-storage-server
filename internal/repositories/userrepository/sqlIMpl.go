@@ -4,7 +4,7 @@ import (
 	"context"
 	"database/sql"
 
-	"protected-storage-server/internal/entity/myerrors"
+	"protected-storage-server/internal/myerrors"
 
 	"github.com/omeid/pgerror"
 	"github.com/rs/zerolog/log"

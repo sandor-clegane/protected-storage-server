@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 
-	"protected-storage-server/internal/entity/myerrors"
+	myerrors2 "protected-storage-server/internal/myerrors"
 
 	"github.com/google/uuid"
 	"google.golang.org/grpc/codes"
@@ -38,7 +38,7 @@ func (s *Server) CreateUser(ctx context.Context, in *proto.UserRegisterRequest) 
 
 	err := s.userService.Create(ctx, login, password, userID)
 	if err != nil {
-		var uv *myerrors.UserViolationError
+		var uv *myerrors2.UserViolationError
 		if errors.As(err, &uv) {
 			return nil, status.Errorf(codes.Unauthenticated, uv.Error())
 		}
@@ -60,7 +60,7 @@ func (s *Server) LoginUser(ctx context.Context, in *proto.UserAuthorizedRequest)
 
 	userID, err := s.userService.Login(ctx, login, password)
 	if err != nil {
-		var ip *myerrors.InvalidPasswordError
+		var ip *myerrors2.InvalidPasswordError
 		if errors.As(err, &ip) {
 			return nil, status.Errorf(codes.Unauthenticated, ip.Error())
 		}
@@ -84,7 +84,7 @@ func (s *Server) SaveRawData(ctx context.Context, in *proto.SaveRawDataRequest) 
 
 	err = s.storageService.SaveRawData(ctx, in.Name, in.Data, userID)
 	if err != nil {
-		var dv *myerrors.DataViolationError
+		var dv *myerrors2.DataViolationError
 		if errors.As(err, &dv) {
 			return nil, status.Errorf(codes.AlreadyExists, dv.Error())
 		}
@@ -103,7 +103,7 @@ func (s *Server) GetRawData(ctx context.Context, in *proto.GetRawDataRequest) (*
 
 	data, err := s.storageService.GetRawData(ctx, in.Name, userID)
 	if err != nil {
-		var nf *myerrors.NotFoundError
+		var nf *myerrors2.NotFoundError
 		if errors.As(err, &nf) {
 			return nil, status.Errorf(codes.NotFound, nf.Error())
 		}
@@ -122,7 +122,7 @@ func (s *Server) SaveLoginWithPassword(ctx context.Context, in *proto.SaveLoginW
 
 	err = s.storageService.SaveLoginWithPassword(ctx, in.Name, in.Login, in.Password, userID)
 	if err != nil {
-		var dv *myerrors.DataViolationError
+		var dv *myerrors2.DataViolationError
 		if errors.As(err, &dv) {
 			return nil, status.Errorf(codes.AlreadyExists, dv.Error())
 		}
@@ -141,7 +141,7 @@ func (s *Server) GetLoginWithPassword(ctx context.Context, in *proto.GetLoginWit
 
 	data, err := s.storageService.GetLoginWithPassword(ctx, in.Name, userID)
 	if err != nil {
-		var nf *myerrors.NotFoundError
+		var nf *myerrors2.NotFoundError
 		if errors.As(err, &nf) {
 			return nil, status.Errorf(codes.NotFound, nf.Error())
 		}
@@ -160,7 +160,7 @@ func (s *Server) SaveBinaryData(ctx context.Context, in *proto.SaveBinaryDataReq
 
 	err = s.storageService.SaveBinaryData(ctx, in.Name, in.Data, userID)
 	if err != nil {
-		var dv *myerrors.DataViolationError
+		var dv *myerrors2.DataViolationError
 		if errors.As(err, &dv) {
 			return nil, status.Errorf(codes.AlreadyExists, dv.Error())
 		}
@@ -179,7 +179,7 @@ func (s *Server) GetBinaryData(ctx context.Context, in *proto.GetBinaryDataReque
 
 	data, err := s.storageService.GetBinaryData(ctx, in.Name, userID)
 	if err != nil {
-		var nf *myerrors.NotFoundError
+		var nf *myerrors2.NotFoundError
 		if errors.As(err, &nf) {
 			return nil, status.Errorf(codes.NotFound, nf.Error())
 		}
@@ -205,7 +205,7 @@ func (s *Server) SaveCardData(ctx context.Context, in *proto.SaveCardDataRequest
 
 	err = s.storageService.SaveCardData(ctx, in.Name, card, userID)
 	if err != nil {
-		var dv *myerrors.DataViolationError
+		var dv *myerrors2.DataViolationError
 		if errors.As(err, &dv) {
 			return nil, status.Errorf(codes.AlreadyExists, dv.Error())
 		}
@@ -224,7 +224,7 @@ func (s *Server) GetCardData(ctx context.Context, in *proto.GetCardDataRequest) 
 
 	data, err := s.storageService.GetCardData(ctx, in.Name, userID)
 	if err != nil {
-		var nf *myerrors.NotFoundError
+		var nf *myerrors2.NotFoundError
 		if errors.As(err, &nf) {
 			return nil, status.Errorf(codes.NotFound, nf.Error())
 		}

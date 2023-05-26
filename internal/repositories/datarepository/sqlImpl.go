@@ -4,7 +4,7 @@ import (
 	"context"
 	"database/sql"
 
-	"protected-storage-server/internal/entity/myerrors"
+	myerrors2 "protected-storage-server/internal/myerrors"
 
 	"github.com/omeid/pgerror"
 	"github.com/rs/zerolog/log"
@@ -43,7 +43,7 @@ func (r *rawDataRepositoryImpl) Save(ctx context.Context, userID, name string, d
 
 	if err != nil {
 		if e := pgerror.UniqueViolation(err); e != nil {
-			return myerrors.NewDataViolationError(name, err)
+			return myerrors2.NewDataViolationError(name, err)
 		}
 		return err
 	}
@@ -63,7 +63,7 @@ func (r *rawDataRepositoryImpl) GetByNameAndTypeAndUserID(ctx context.Context, u
 	err := row.Scan(&data)
 	if err != nil {
 		if err == sql.ErrNoRows {
-			return nil, myerrors.NewNotFoundError(name, err)
+			return nil, myerrors2.NewNotFoundError(name, err)
 		}
 		return nil, err
 	}
